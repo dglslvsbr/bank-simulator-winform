@@ -22,7 +22,7 @@ namespace BankSimulator.Components
             Items.Add("Credit Card");
             Items.Add("PIX");
             Items.Add("Transactions");
-            Items.Add("Loja");
+            Items.Add("Store");
             Items.Add("Close");
         }
 
@@ -36,14 +36,18 @@ namespace BankSimulator.Components
             Items[1].Click += async (sender, args) =>
             {
                 _app.Screens["PersonData"].BringToFront();
-               
-                await ((PersonData)_app.Screens["PersonData"]).MostrarDados();
                 EnableMenu();
+
+                await ((PersonData)_app.Screens["PersonData"]).MostrarDados();
             };
             Items[2].Click += (sender, args) => MessageBox.Show("Ainda não está pronto!");
             Items[3].Click += (sender, args) => MessageBox.Show("Ainda não está pronto!!");
             Items[4].Click += (sender, args) => MessageBox.Show("Ainda não está pronto!!");
-            Items[5].Click += (sender, args) => MessageBox.Show("Ainda não está pronto!!");
+            Items[5].Click += (sender, args) =>
+            {
+                _app.Screens["Store"].BringToFront();
+                EnableMenu();
+            };
             Items[6].Click += (sender, args) => _app.Close();
         }
 

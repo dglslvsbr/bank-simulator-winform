@@ -23,6 +23,7 @@ namespace BankSimulator
             Screens["Recover"] = new Recover(this);
             Screens["Main"] = new Main(this);
             Screens["PersonData"] = new PersonData(this);
+            Screens["Store"] = new Store(this);
 
             Screens["Initial"].BringToFront();
         }
