@@ -7,6 +7,23 @@ namespace BankSimulator.Services
 {
     static class AuthenticationService
     {
+        public static async Task<bool> CheckPassword(LoginDTO loginDTO)
+        {
+            try
+            {
+                var response = await HttpClientStatic.HttpClient.PostAsync("Auth/CheckPassword",
+                    new StringContent(JsonSerializer.Serialize(loginDTO),
+                    Encoding.UTF8, "application/json"));
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
+                return false;
+            }
+        }
+
         public static async Task<string> Authenticate(LoginDTO loginDto)
         {
             try
@@ -26,23 +43,6 @@ namespace BankSimulator.Services
             {
                 ApplicationLog.RegisterLog("An error occurred: " + e.Message);
                 return null!;
-            }
-        }
-
-        public static async Task<bool> CheckPassword(LoginDTO loginDTO)
-        {
-            try
-            {
-                var response = await HttpClientStatic.HttpClient.PostAsync("Auth/CheckPassword",
-                    new StringContent(JsonSerializer.Serialize(loginDTO),
-                    Encoding.UTF8, "application/json"));
-
-                return response.IsSuccessStatusCode;
-            }
-            catch (Exception e)
-            {
-                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
-                return false;
             }
         }
     }

@@ -17,7 +17,7 @@ namespace BankSimulator.Services
                     Name = txtBoxes["Name"].Text,
                     Surname = txtBoxes["Surname"].Text,
                     Email = txtBoxes["Email"].Text,
-                    Password = txtBoxes["Password"].Text,
+                    Password = HashService.HashPassword(txtBoxes["Password"].Text),
                     CPF = txtBoxes["CPF"].Text,
                     Saldo = 10000.00,
                     Address = new Address
