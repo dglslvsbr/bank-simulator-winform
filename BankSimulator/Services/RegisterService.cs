@@ -17,7 +17,7 @@ namespace BankSimulator.Services
                     Name = txtBoxes["Name"].Text,
                     Surname = txtBoxes["Surname"].Text,
                     Email = txtBoxes["Email"].Text,
-                    Password = HashService.HashPassword(txtBoxes["Password"].Text),
+                    Password = BCrypt.Net.BCrypt.HashPassword(txtBoxes["Password"].Text),
                     CPF = txtBoxes["CPF"].Text,
                     Saldo = 10000.00,
                     Address = new Address
@@ -43,9 +43,9 @@ namespace BankSimulator.Services
 
                 return responseClient.IsSuccessStatusCode;
             }
-            catch (Exception e)
+            catch (HttpRequestException ex)
             {
-                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
+                ApplicationLog.RegisterLog("Request Error: " + ex.Message);
                 return false;
             }
         }

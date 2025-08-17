@@ -71,19 +71,19 @@ namespace BankSimulator.Views
 
         private void CreateEventHandlers()
         {
-            _txtBoxes["CPF"].KeyPress += (obj, e) =>
+            _txtBoxes["CPF"].KeyDown += (obj, e) =>
             {
-                if (char.IsLetter(e.KeyChar)) e.Handled = true;
+                if (!(e.KeyCode == Keys.Back) && !char.IsDigit((char)e.KeyCode)) e.SuppressKeyPress = true;
             };
 
-            _txtBoxes["Number"].KeyPress += (obj, e) =>
+            _txtBoxes["Number"].KeyDown += (obj, e) =>
             {
-                if (char.IsLetter(e.KeyChar)) e.Handled = true;
+                if (!(e.KeyCode == Keys.Back) && !char.IsDigit((char)e.KeyCode)) e.SuppressKeyPress = true;
             };
 
-            _txtBoxes["HouseNumber"].KeyPress += (obj, e) =>
+            _txtBoxes["HouseNumber"].KeyDown += (obj, e) =>
             {
-                if (char.IsLetter(e.KeyChar)) e.Handled = true;
+                if (!(e.KeyCode == Keys.Back) && !char.IsDigit((char)e.KeyCode)) e.SuppressKeyPress = true;
             };
 
             // Password visibility handler

@@ -19,7 +19,7 @@
             }
             catch (IOException)
             {
-                Console.WriteLine("It was not possible register the log");
+                Console.WriteLine("It was not possible to log the record.");
             }
         }
     }

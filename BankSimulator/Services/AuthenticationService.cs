@@ -17,9 +17,9 @@ namespace BankSimulator.Services
 
                 return response.IsSuccessStatusCode;
             }
-            catch (Exception e)
+            catch (HttpRequestException ex)
             {
-                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
+                ApplicationLog.RegisterLog("Request Error: " + ex.Message);
                 return false;
             }
         }
@@ -39,9 +39,9 @@ namespace BankSimulator.Services
 
                 return content;
             }
-            catch (Exception e)
+            catch (HttpRequestException ex)
             {
-                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
+                ApplicationLog.RegisterLog("Request Error: " + ex.Message);
                 return null!;
             }
         }

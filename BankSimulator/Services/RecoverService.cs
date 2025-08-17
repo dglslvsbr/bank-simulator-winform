@@ -8,29 +8,6 @@ namespace BankSimulator.Services
 {
     static class RecoverService
     {
-        public static async Task<bool> Change(LoginDTO loginDTO)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(loginDTO.Password) || (loginDTO.Password.Length < 6))
-                {
-                    return false;
-                }
-
-                var response = await HttpClientStatic.HttpClient.PostAsync("Recover/ChangePassword",
-                                                           new StringContent(JsonSerializer.Serialize(loginDTO),
-                                                           Encoding.UTF8, "application/json"));
-
-                return response.IsSuccessStatusCode;
-
-            }
-            catch (Exception e)
-            {
-                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
-                return false;
-            }
-        }
-
         public static async Task<bool> SendPostRequest<T>(string endpoint, T data)
         {
             try
@@ -41,9 +18,9 @@ namespace BankSimulator.Services
 
                 return response.IsSuccessStatusCode;
             }
-            catch (Exception e)
+            catch (HttpRequestException ex)
             {
-                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
+                ApplicationLog.RegisterLog("Request Error: " + ex.Message);
                 return false;
             }
         }
@@ -67,6 +44,29 @@ namespace BankSimulator.Services
         public static async Task<bool> CheckingCode(RecoverDTO recoverDto)
         {
             return await SendPostRequest("Recover/CheckVerificationCode", recoverDto);
+        }
+
+        public static async Task<bool> Change(LoginDTO loginDTO)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(loginDTO.Password) || (loginDTO.Password.Length < 6))
+                {
+                    return false;
+                }
+
+                var response = await HttpClientStatic.HttpClient.PostAsync("Recover/ChangePassword",
+                                                           new StringContent(JsonSerializer.Serialize(loginDTO),
+                                                           Encoding.UTF8, "application/json"));
+
+                return response.IsSuccessStatusCode;
+
+            }
+            catch (HttpRequestException ex)
+            {
+                ApplicationLog.RegisterLog("Request Error: " + ex.Message);
+                return false;
+            }
         }
     }
 }

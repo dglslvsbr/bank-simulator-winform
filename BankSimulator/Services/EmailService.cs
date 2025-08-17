@@ -41,9 +41,14 @@ namespace BankSimulator.Services
                 Send(contentResult.Email, code);
                 return true;
             }
-            catch (Exception e)
+            catch (HttpRequestException ex)
             {
-                ApplicationLog.RegisterLog("An error occurred: " + e.Message);
+                ApplicationLog.RegisterLog("Request Error: " + ex.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                ApplicationLog.RegisterLog("Generic Error: " + ex.Message);
                 return false;
             }
         }
@@ -72,9 +77,9 @@ namespace BankSimulator.Services
 
                 smtp.Send(_mailMessage);
             }
-            catch (SmtpException e)
+            catch (SmtpException ex)
             {
-                ApplicationLog.RegisterLog($"An error occurred: {e.Message}");
+                ApplicationLog.RegisterLog("An error occurred:" + ex.Message);
             }
         }
     }
