@@ -14,6 +14,6 @@
         public Recover? Recover { get; set; }
         public CreditCard? CreditCard { get; set; }
         public ICollection<Invoice>? Invoice { get; set; }
-        public Transaction? Transaction { get; set; }
+        public ICollection<Transaction>? Transaction { get; set; }
     }
 }

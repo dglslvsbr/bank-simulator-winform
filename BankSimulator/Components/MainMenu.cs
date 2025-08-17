@@ -41,7 +41,11 @@ namespace BankSimulator.Components
                 await ((PersonData)_app.Screens["PersonData"]).MostrarDados();
             };
             Items[2].Click += (sender, args) => MessageBox.Show("Ainda não está pronto!");
-            Items[3].Click += (sender, args) => MessageBox.Show("Ainda não está pronto!!");
+            Items[3].Click += (sender, args) =>
+            {
+                _app.Screens["Pix"].BringToFront();
+                EnableMenu();
+            };
             Items[4].Click += (sender, args) => MessageBox.Show("Ainda não está pronto!!");
             Items[5].Click += (sender, args) =>
             {
