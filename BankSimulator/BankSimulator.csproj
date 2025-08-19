@@ -19,6 +19,9 @@
     <None Update="Utils\Images\bicicleta.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Utils\Images\card.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Utils\Images\carro.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

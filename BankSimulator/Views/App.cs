@@ -23,6 +23,7 @@ namespace BankSimulator
             Screens["Recover"] = new Recover(this);
             Screens["Main"] = new Main(this);
             Screens["PersonData"] = new PersonData(this);
+            Screens["CreditCard"] = new CreditCard(this);
             Screens["Pix"] = new Pix(this);
             Screens["Store"] = new Store(this);
 
