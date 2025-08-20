@@ -1,11 +1,13 @@
 ﻿using BankSimulator.Components;
+using BankSimulator.Enums;
+using BankSimulator.Models;
 
 namespace BankSimulator.Views
 {
     internal class Store : Panel
     {
-        private readonly App _app = null!;
-        private readonly Dictionary<PictureBox, NewButton> _storeItems = [];
+        public readonly App _app = null!;
+        private readonly Dictionary<string, NewItem> _storeItems = [];
 
         public Store(App app)
         {
@@ -29,9 +31,9 @@ namespace BankSimulator.Views
 
         private void CreateStoreItems()
         {
-            _storeItems[new NewPictureBox(this, "Utils/Images/computer.png", 128, 128, 180, 50)] = new NewButton(this, "Comprar", Color.LightGreen, 100, 30, 200, 180, null);
-            _storeItems[new NewPictureBox(this, "Utils/Images/bicicleta.png", 128, 110, 180, 220)] = new NewButton(this, "Comprar", Color.LightGreen, 100, 30, 200, 330, null);
-            _storeItems[new NewPictureBox(this, "Utils/Images/carro.png", 128, 90, 180, 390)] = new NewButton(this, "Comprar", Color.LightGreen, 100, 30, 200, 480, null);
+            _storeItems["computer"] = new(this, "Utils/Images/computer.png", ProductEnum.Computer, 5000.00, 180, 20);
+            _storeItems["bicicleta"] = new(this, "Utils/Images/bicicleta.png", ProductEnum.Bicicleta, 2500.00, 180, 200);
+            _storeItems["carro"] = new(this, "Utils/Images/carro.png", ProductEnum.Carro, 15600.00, 180, 380);
         }
     }
 }

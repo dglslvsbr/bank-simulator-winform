@@ -67,5 +67,31 @@ namespace BankSimulator.Utils
 
             return true;
         }
+
+        public static async Task<bool> CheckPayment(Dictionary<string, NewTextBox> txtBoxes)
+        {
+            string cpf = txtBoxes["CPF"].Text;
+            string number = txtBoxes["Number"].Text;
+            int cvv = int.Parse(txtBoxes["CVV"].Text);
+
+            int currentClientId = StoreToken.ExtractId();
+
+            var response = await HttpClientStatic.HttpClient.GetAsync($"Client/Get/{currentClientId}");
+
+            if (!response.IsSuccessStatusCode)
+                return false;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            var clientDeserialize = JsonConvert.DeserializeObject<Client>(content);
+
+            if (clientDeserialize is not null &&
+                cpf == clientDeserialize.CPF &&
+                number == clientDeserialize.CreditCard!.Number &&
+                cvv == clientDeserialize.CreditCard.CVV)
+                return true;
+
+            return false;
+        }
     }
 }
